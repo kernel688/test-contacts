@@ -1,0 +1,91 @@
+<main class="grid-view padding-1rem">
+  <header class="flexparent-11000 gap-1rem borderbottom-1dmain">
+    <img class="svgcolor-main height-2rem cursor-pointer" routerLink="/" src="../../../assets/svg/groups_FILL0_wght400_GRAD0_opsz24.svg" alt="Page Icon">
+    <h1 class="color-main cursor-pointer" routerLink="/">MIS CONTACTOS</h1>
+  </header>
+
+  <aside class="borderright-1dmain">
+    <div class="search-card borderbottom-1dmain height-5rem">
+      <mat-form-field appearance="outline">
+        <mat-label>Filtrar</mat-label>
+        <input matInput class="contact-field-input" type="text" [formControl]="contactsFilter">
+      </mat-form-field>
+    </div>
+
+    <div class="contact-card borderbottom-1dmain height-5rem paddingtop-0_5rem" *ngIf="contacts.length == 0 && loading == 0">
+      <p class="cursor-pointer">
+        <strong>No tienes ningun contacto aun.</strong>
+      </p>
+    </div>
+    <div class="contact-card borderbottom-1dmain height-5rem paddingtop-0_5rem" *ngIf="contacts.length != 0 && contactsFiltered.length == 0 && loading == 0">
+      <p class="cursor-pointer">No hay contactos que coincidan con tu busqueda.</p>
+    </div>
+    <div class="contact-card borderbottom-1dmain height-5rem paddingtop-0_5rem" *ngFor="let contact of contactsFiltered" (click)="viewContact(contact)">
+      <p class="cursor-pointer">
+        <strong>{{contact.name}}</strong>
+        <br *ngIf="contact.phone != ''">
+        {{contact.phone}}
+        <br *ngIf="contact.email != ''">
+        {{contact.email}}
+      </p>
+    </div>
+  </aside>
+
+  <section class="borderleft-1dmain">
+    <div class="flexparent-21001" *ngIf="contactState == 'none'">
+      <img class="svgcolor-main height-5rem" src="../../../assets/svg/person_FILL0_wght400_GRAD0_opsz24.svg" alt="Person Icon">
+      <h2 class="textalign-center width-15rem">Haz clic en un contacto para ver sus detalles o agrega uno nuevo.</h2>
+      <button type="button" mat-raised-button color="primary" (click)="addContact()">Agregar</button>
+    </div>
+
+    <form class="flexparent-21002 gap-1rem" [formGroup]="contactForm" *ngIf="contactState != 'none'">
+      <div class="flexparent-11040 width-20rem">
+        <h2>
+          {{contactForm.valid ? contactForm.controls.contactName.value : 'Digita el nombre del contacto e' }}
+          <br>
+          {{contactForm.valid ? getContactAge() + ' años' : 'indica la fecha de su nacimiento'}}
+        </h2>
+        <img class="svgcolor-main height-2rem cursor-pointer" *ngIf="contactState == 'view'" matTooltip="Close Contact" src="../../../assets/svg/close_FILL0_wght400_GRAD0_opsz24.svg" alt="Close Contact" (click)="closeContact()">
+      </div>
+      <div class="flexparent-21002">
+        <mat-form-field appearance="outline" class="width-20rem">
+          <mat-label>Nombre</mat-label>
+          <input matInput id="name" maxlength="50" formControlName="contactName" [readonly]="contactState != 'edit' && contactState != 'add'">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="width-20rem">
+          <mat-label>Teléfono</mat-label>
+          <input matInput id="phone" mask='(000) 000-0000' formControlName="contactPhone" [readonly]="contactState != 'edit' && contactState != 'add'">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="width-20rem">
+          <mat-label>Fecha de nacimiento:</mat-label>
+          <input matInput [matDatepicker]="picker" id="dob" formControlName="contactDob" [readonly]="contactState != 'edit' && contactState != 'add'">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="width-20rem">
+          <mat-label>Dirección</mat-label>
+          <input matInput id="address" formControlName="contactAddress" [readonly]="contactState != 'edit' && contactState != 'add'">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="width-20rem">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput id="email" formControlName="contactEmail" [readonly]="contactState != 'edit' && contactState != 'add'">
+        </mat-form-field>
+        <div class="flexparent-11000 gap-1rem">
+          <button type="button" mat-raised-button color="primary" *ngIf="contactState == 'view'" (click)="editContact()">Editar</button>
+          <button type="button" mat-raised-button color="warn" *ngIf="contactState == 'view'" (click)="deleteContact()">Eliminar</button>
+
+          <button type="button" mat-raised-button color="accent" *ngIf="contactState == 'edit'" [disabled]="this.contactForm.invalid" (click)="saveEditContact()">Guardar</button>
+          <button type="button" mat-raised-button color="primary" *ngIf="contactState == 'edit'" (click)="cancelEditContact()">Cancelar</button>
+
+          <button type="button" mat-raised-button color="primary" *ngIf="contactState == 'add'" [disabled]="this.contactForm.invalid" (click)="saveAddContact()">Agregar</button>
+          <button type="button" mat-raised-button color="warn" *ngIf="contactState == 'add'" (click)="closeContact()">Cancelar</button>
+        </div>
+      </div>
+
+    </form>
+  </section>
+
+
+
+</main>
+<div *ngIf="loading != 0" class="loading"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>

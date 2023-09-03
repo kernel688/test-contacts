@@ -1,1 +1,170 @@
-/* You can add global styles to this file, and also import other style files */
+* { box-sizing: border-box;}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+header {
+  grid-area: header;
+  margin-bottom: 1rem;
+}
+aside {
+  grid-area: aside;
+  padding: 0 1rem 1rem 0;
+}
+section {
+  grid-area: section;
+  padding: 0 0 1rem 1rem;
+}
+button {
+  width: 5rem;
+}
+
+
+
+.bgc-main {
+  background-color: #673ab7
+}
+.bgc-accent {
+  background-color: #ffd740
+}
+.bgc-warning {
+  background-color: #f44336
+}
+.borderbottom-1dmain {
+  border-bottom: 1px dotted #673ab7;
+}
+.borderright-1dmain {
+  border-right: 1px dotted #673ab7;
+}
+.color-main {
+  color: #673ab7
+}
+.color-accent {
+  color: #ffd740
+}
+.color-warning {
+  color: #f44336
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.flexparent-11000 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.flexparent-11040 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.flexparent-21000 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.flexparent-21001 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center
+}
+.flexparent-21002 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+.gap-1rem {
+  gap: 1rem;
+}
+.gap-2rem {
+  gap: 2rem;
+}
+.grid-view {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas:
+    'header header '
+    'aside section';
+}
+.height-2rem {
+  height: 2rem;
+}
+.height-5rem {
+  height: 5rem;
+}
+.padding-1rem {
+  padding: 1rem;
+}
+.paddingtop-0_5rem {
+  padding-top: 0.5rem;
+}
+.textalign-center {
+  text-align: center;
+}
+.width-15rem {
+  width: 15rem;
+}
+.width-20rem {
+  width: 20rem;
+}
+
+
+
+.svgcolor-main {
+  filter: invert(26%) sepia(47%) saturate(2905%) hue-rotate(246deg) brightness(86%) contrast(93%);
+}
+
+
+
+
+
+/////////////// LOADING SPINNER ///////////////
+.loading {
+  z-index: 100000;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #673ab7;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #673ab7 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
