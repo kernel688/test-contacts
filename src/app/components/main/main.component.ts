@@ -181,6 +181,7 @@ export class MainComponent implements OnInit {
     this.contacts[this.currentContactIndex].email = this.contactForm.controls.contactEmail.value || ''
     this.contactsFiltered = this.contacts
     this.viewContact(this.contacts[this.currentContactIndex])
+    this.closeContact()
   }
 
   deleteContact() {

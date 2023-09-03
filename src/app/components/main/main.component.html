@@ -57,7 +57,7 @@
           <input matInput id="phone" mask='(000) 000-0000' formControlName="contactPhone" [readonly]="contactState != 'edit' && contactState != 'add'">
         </mat-form-field>
         <mat-form-field appearance="outline" class="width-20rem">
-          <mat-label>Fecha de nacimiento:</mat-label>
+          <mat-label>Fecha de nacimiento</mat-label>
           <input matInput [matDatepicker]="picker" id="dob" formControlName="contactDob" [readonly]="contactState != 'edit' && contactState != 'add'">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -77,7 +77,7 @@
           <button type="button" mat-raised-button color="accent" *ngIf="contactState == 'edit'" [disabled]="this.contactForm.invalid" (click)="saveEditContact()">Guardar</button>
           <button type="button" mat-raised-button color="primary" *ngIf="contactState == 'edit'" (click)="cancelEditContact()">Cancelar</button>
 
-          <button type="button" mat-raised-button color="primary" *ngIf="contactState == 'add'" [disabled]="this.contactForm.invalid" (click)="saveAddContact()">Agregar</button>
+          <button type="button" mat-raised-button color="primary" *ngIf="contactState == 'add'" [disabled]="this.contactForm.invalid" (click)="saveAddContact()">Crear</button>
           <button type="button" mat-raised-button color="warn" *ngIf="contactState == 'add'" (click)="closeContact()">Cancelar</button>
         </div>
       </div>
